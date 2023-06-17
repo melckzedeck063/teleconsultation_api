@@ -45,7 +45,7 @@ exports.updateOne = Model => catchAsync(async (req, res, next) => {
         return next(new AppError('Failed to update the document', 400));
     }
 
-    response(doc, 203, res, 'Document updated succesfully')
+    response(doc, 201, res, 'Document updated succesfully')
 })
 
 exports.createOne = Model => catchAsync(async (req, res, next) => {
