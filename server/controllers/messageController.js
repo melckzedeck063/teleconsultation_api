@@ -41,3 +41,20 @@ exports.getMyMessages = catchAsync( async (req,res,next) => {
 })
 
 exports.getAllMessages = Factory.getAll(Message);
+
+exports.getChatMessage =  catchAsync( async (req,res,next) => {
+    const messages = await Message.find({sender :  req.user.id, receiver : req.params.id});
+
+    if(!messages){
+        return next(new AppError('No data  found  with the  specified ID', 404))
+    }
+
+    res.status(200).json({
+        status: 'success',
+        message:"message sent",
+        data : {
+            messages
+        }
+    })
+
+} )

@@ -10,6 +10,7 @@ router.use(AuthController.protect);
 
 router.post('/new_message', MessageController.sendMessage);
 router.get('/my_messages', MessageController.getMyMessages);
+router.get('/my_chats/:id', MessageController.getChatMessage);
 
 
 module.exports =  router;
