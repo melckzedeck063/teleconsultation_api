@@ -82,6 +82,7 @@ const doctorRouter =  require('./routes/doctor_route');
 const  messageRouter =  require('./routes/message_route');
 const appointmentRouter =  require('./routes/appointment_route');
 
+
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/disease', diseaseRouter);
 
@@ -113,6 +114,7 @@ app.use(globalErrorHandler);
 // console.log(Date.now().toString())
 
 const port = process.env.PORT || 4000;
+app.get('/', (req,res)=> res.send(`App is running from port : ${port}`));
 
 app.listen(port, () => {
     console.log(`Server running from port ${port}`)
