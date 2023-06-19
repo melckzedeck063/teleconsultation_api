@@ -77,7 +77,23 @@ exports.getAll = Model => catchAsync(async (req, res, next) => {
 })
 
 exports.getMyMessages = Model => catchAsync( async  (req,res,next)  => {
-    const features  =   new ApiFeatures(Model.find({sender : req.user.id}), req.query)
+    const features  =   new ApiFeatures(Model.find({$or: [{ senderId: req.user.id }, { receiverId: req.user.id }]}), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate()
+    
+    const doc = await features.query;
+    if(!doc){
+        return next(new AppError("No data found with the specified ID", 400))
+    }
+
+    response(doc,200,res, 'your messages')
+
+})
+
+exports.getMyAppointments = Model => catchAsync( async  (req,res,next)  => {
+    const features  =   new ApiFeatures(Model.find({$or: [{ customer: req.user.id }, { doctor: req.user.id }]}), req.query)
     .filter()
     .sort()
     .limitFields()

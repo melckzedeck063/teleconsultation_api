@@ -58,3 +58,15 @@ exports.getChatMessage =  catchAsync( async (req,res,next) => {
     })
 
 } )
+
+exports.deleteMessages = catchAsync( async (req,res,next) => {
+    const messages =   await Message.deleteMany();
+    if(!messages){
+        return  next(new AppError('Request failed',400))
+    }
+
+    res.status(200).json({
+        status: 'success',
+        message:"messages deleted succesfully"
+    })
+})

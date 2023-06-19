@@ -80,16 +80,16 @@ const diseaseRouter =   require('./routes/disease_router');
 const doctorRouter =  require('./routes/doctor_route');
 // // const fileUploadRouter =  require('./routes/fileUpload_router');
 const  messageRouter =  require('./routes/message_route');
-// const orderRouter =  require('./routes/orderRoute')
+const appointmentRouter =  require('./routes/appointment_route');
 
 app.use('/api/v1/user', userRouter);
 app.use('/api/v1/disease', diseaseRouter);
 
 app.use('/api/v1/doctor',doctorRouter )
 app.use('/api/v1/message',messageRouter);
+app.use('/api/v1/appointment', appointmentRouter)
 
 // // app.use('/api/v1/posts',fileUploadRouter );
-// app.use('/api/v1/orders', orderRouter)
 
 app.post('/api/v1/posts/upload_photo', upload.single('photo'), (req, res) => {
     // do something with the photo
