@@ -12,6 +12,10 @@ const AppointmentSchema  =  mongoose.Schema({
         ref : 'User',
         required : true
      },
+     status : {
+        type: String,
+        default : "Pending"
+     },
      due_date : {
         type : Date,
         default  : Date.now()
