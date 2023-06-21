@@ -17,7 +17,7 @@ const MessageSchema =  mongoose.Schema({
     },
     receiver  : {
         type: mongoose.Schema.ObjectId,
-        ref: 'Doctor',
+        ref: 'User',
         required: true
     },
 })
@@ -29,7 +29,7 @@ MessageSchema.pre(/^find/, function(next){
     })
     .populate({
         path  :'receiver',
-        select :'-__v -category -bibliography -date_registered -working_station'
+        select :'-__v  -password  -role'
     })
     
 

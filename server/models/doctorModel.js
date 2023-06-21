@@ -26,6 +26,9 @@ const DoctorSchema =  mongoose.Schema({
         type : mongoose.Schema.ObjectId,
         ref: 'Disease'
     },
+    working_days : [
+        {type :  String}
+    ],
     working_station : {
         type : String,
         default : ""
