@@ -21,6 +21,7 @@ const AppointmentSchema  =  mongoose.Schema({
         default  : Date.now()
      },
      due_day : String,
+     due_time : String,
      date_created : {
         type : Date,
         default : Date.now()

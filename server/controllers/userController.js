@@ -3,6 +3,7 @@ const AppError =   require('../utils/AppError');
 
 const {User}=  require('../models/userModel');
 
+const Factory = require('../controllers/factoryController')
 
 const sendResponse =  (data, message, res, statusCode)  => {
     res.status(statusCode).json({
@@ -47,4 +48,26 @@ exports.getMe = catchAsync ( async (req,res,next) => {
     }
 
     sendResponse(logedUser, "user found", res, 200)
+})
+
+exports.updateUser = Factory.updateOne(User);
+
+
+exports.updatePassword =  catchAsync( async(req,res,next) => {
+    // check if user exists 
+    const user =  await User.findById(req.user.id).select('+password');
+
+    // check if the password entered is correct 
+    if( !( await user.correctPassword(req.body.current_password, user.password ))){
+        return next(new AppError('You have entered incorrect password', 403));
+    }
+
+    user.password =  req.body.new_password;
+    user.confirmPassword =  req.body.confirm_password;
+
+    await user.save();
+
+
+    createSendToken(user, 200, res);
+
 })
