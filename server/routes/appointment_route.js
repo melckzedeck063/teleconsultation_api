@@ -11,6 +11,7 @@ router.use(AuthController.protect);
 router.post('/new_appointment', AppointmentController.bookAppointment);
 router.get('/all_appointments', AppointmentController.getAllAppointments);
 router.get('/my_appointments', AppointmentController.getMyAppointmments);
+router.get('/doctor_appointments/:id', AppointmentController.doctorAppointments);
 router.get('/appointmment/:id', AppointmentController.getAppointment);
 router.patch('/update_appointment', AppointmentController.updateAppointment);
 router.delete('/delete/:id',AppointmentController.deleteAppointment)

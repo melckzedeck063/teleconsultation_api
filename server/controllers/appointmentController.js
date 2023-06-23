@@ -27,4 +27,5 @@ exports.getAllAppointments = Factory.getAll(Appointment);
 exports.getMyAppointmments  = Factory.getMyAppointments(Appointment);
 exports.getAppointment = Factory.getOne(Appointment);
 exports.updateAppointment  = Factory.updateOne(Appointment);
+exports.doctorAppointments =   Factory.getDoctorAppointments(Appointment);
 exports.deleteAppointment = Factory.deleteModel(Appointment);

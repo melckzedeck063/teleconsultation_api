@@ -108,6 +108,22 @@ exports.getMyAppointments = Model => catchAsync( async  (req,res,next)  => {
 
 })
 
+exports.getDoctorAppointments = Model => catchAsync( async  (req,res,next)  => {
+    const features  =   new ApiFeatures(Model.find({ doctor: req.params.id}), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate()
+    
+    const doc = await features.query;
+    if(!doc){
+        return next(new AppError("No data found with the specified ID", 400))
+    }
+
+    response(doc,200,res, 'your messages')
+
+})
+
 exports.deactivateOne = Model => catchAsync(async (req, res, next) => {
     req.body.status = "deleted"
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
